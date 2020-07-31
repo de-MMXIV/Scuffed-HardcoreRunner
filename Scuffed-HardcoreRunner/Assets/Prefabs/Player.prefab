@@ -296,6 +296,7 @@ MonoBehaviour:
   jump: {x: 0, y: 0, z: 0}
   JumpForce: 2
   PlayerCamera: {fileID: 7321551060287284171}
+  PlayerDeath: 0
 --- !u!114 &6789945709235739769
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEditor;
-
+/// <summary>
+/// Moritz
+/// </summary>
 public class PlayerController : NetworkBehaviour
 {
     [SerializeField]
@@ -14,12 +16,15 @@ public class PlayerController : NetworkBehaviour
     public bool isGrounded;
     public Vector3 jump;
     public float JumpForce = 4.0f;
+    private bool CursorLocked = true;
 
     public GameObject PlayerCamera;
     private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
+        
 
         startPos = transform.position;
         if (this.isLocalPlayer)
@@ -40,6 +45,9 @@ public class PlayerController : NetworkBehaviour
     void Update()
     {
         PlayerMovement();
+        CursorLockModeHandler();
+
+
     }
     /// <summary>
     /// Basic Player Movement
@@ -60,13 +68,36 @@ public class PlayerController : NetworkBehaviour
             }
         }
     }
+    /// <summary>
+    /// Setting isGroudned true if your colliding with a surface
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionStay(Collision collision)
     {
         isGrounded = true;
     }
-
+    /// <summary>
+    /// If your not Colliding with a Surface you are not Grounded anymore
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionExit(Collision collision)
     {
         isGrounded = false;
+    }
+    /// <summary>
+    /// Handels the Cursor LockMode if you Press esc
+    /// </summary>
+    private void CursorLockModeHandler()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && CursorLocked)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) && !CursorLocked)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }

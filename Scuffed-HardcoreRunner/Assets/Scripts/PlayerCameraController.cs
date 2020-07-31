@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Moritz
+/// </summary>
 public class PlayerCameraController : MonoBehaviour
 {
     public float RotationSpeed = 1;
