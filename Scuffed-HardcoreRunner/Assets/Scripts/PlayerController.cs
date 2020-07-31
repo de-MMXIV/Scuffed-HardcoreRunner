@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEditor;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -12,19 +13,22 @@ public class PlayerController : NetworkBehaviour
 
     public bool isGrounded;
     public Vector3 jump;
-    public float JumpForce = 2.0f;
+    public float JumpForce = 4.0f;
 
     public GameObject PlayerCamera;
     private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
+
         startPos = transform.position;
         if (this.isLocalPlayer)
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             PlayerCamera.SetActive(true);
             rb = GetComponent<Rigidbody>();
-            jump = new Vector3(0, 2.0f, 0);
+            jump = new Vector3(0, 4.0f, 0);
         }
         else
         {
